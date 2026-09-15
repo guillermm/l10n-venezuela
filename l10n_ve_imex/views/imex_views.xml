@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_customs_declaration_tree" model="ir.ui.view">
+        <field name="name">customs.declaration.tree</field>
+        <field name="model">customs.declaration</field>
+        <field name="arch" type="xml">
+            <tree string="Customs Declarations" decoration-muted="state == 'cancel'">
+                <field name="name"/>
+                <field name="expediente"/>
+                <field name="declaration_type"/>
+                <field name="date"/>
+                <field name="customs_code"/>
+                <field name="amount_total"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_customs_declaration_form" model="ir.ui.view">
+        <field name="name">customs.declaration.form</field>
+        <field name="model">customs.declaration</field>
+        <field name="arch" type="xml">
+            <form string="Customs Declaration">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_draft" type="object" string="Set to Draft" invisible="state == 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state == 'cancel'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="expediente"/>
+                            <field name="declaration_type"/>
+                            <field name="customs_code"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="date_liq"/>
+                            <field name="amount_total"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Invoices">
+                            <field name="move_ids" domain="[('move_type', 'in', ('in_invoice', 'in_refund', 'out_invoice', 'out_refund')), ('state', '=', 'posted')]">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="invoice_date"/>
+                                    <field name="amount_total"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_move_form_imex_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.imex</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="customs_declaration_id" invisible="move_type not in ('in_invoice', 'in_refund')"/>
+                <field name="l10n_ve_expediente" invisible="not customs_declaration_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_customs_declaration" model="ir.actions.act_window">
+        <field name="name">Customs Declarations</field>
+        <field name="res_model">customs.declaration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

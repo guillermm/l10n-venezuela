@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_customs_declaration"
+              name="Customs Declarations"
+              parent="account.menu_finance_entries"
+              action="action_customs_declaration"
+              sequence="50"/>
+</odoo>
