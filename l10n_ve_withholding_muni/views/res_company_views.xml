@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_wh_muni" model="ir.ui.view">
+        <field name="name">res.company.form.wh.muni</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_ve_fiscal_requirements.view_company_form_inherit_ve"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='ve_localization']" position="inside">
+                <group string="Municipal Withholding">
+                    <field name="wh_muni_journal_id"/>
+                    <field name="wh_muni_account_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_territorial_municipality_form_wh" model="ir.ui.view">
+        <field name="name">res.country.state.municipality.form.wh.muni</field>
+        <field name="model">res.country.state.municipality</field>
+        <field name="inherit_id" ref="territorial_pd.view_res_country_state_municipality_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parish_ids']" position="after">
+                <field name="muni_activity_ids" string="Municipal Withholding Activities">
+                    <tree editable="bottom">
+                        <field name="name"/>
+                        <field name="rate"/>
+                        <field name="active"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_l10n_ve_muni_activity_tree" model="ir.ui.view">
+        <field name="name">l10n.ve.muni.activity.tree</field>
+        <field name="model">l10n.ve.muni.activity</field>
+        <field name="arch" type="xml">
+            <tree string="Municipal Activities">
+                <field name="name"/>
+                <field name="municipality_id" required="1"/>
+                <field name="state_id"/>
+                <field name="rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_l10n_ve_muni_activity_search" model="ir.ui.view">
+        <field name="name">l10n.ve.muni.activity.search</field>
+        <field name="model">l10n.ve.muni.activity</field>
+        <field name="arch" type="xml">
+            <search string="Municipal Activities">
+                <field name="name"/>
+                <field name="municipality_id"/>
+                <field name="state_id"/>
+                <filter name="filter_no_municipality" string="Without municipality"
+                        domain="[('municipality_id', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_municipality" string="Municipality" context="{'group_by': 'municipality_id'}"/>
+                    <filter name="group_state" string="State" context="{'group_by': 'state_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_l10n_ve_muni_activity_form" model="ir.ui.view">
+        <field name="name">l10n.ve.muni.activity.form</field>
+        <field name="model">l10n.ve.muni.activity</field>
+        <field name="arch" type="xml">
+            <form string="Municipal Activity">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="municipality_id" required="1"/>
+                        <field name="state_id"/>
+                        <field name="rate"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_l10n_ve_muni_activity" model="ir.actions.act_window">
+        <field name="name">Municipal Activities</field>
+        <field name="res_model">l10n.ve.muni.activity</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_l10n_ve_muni_activity_search"/>
+        <field name="context">{'search_default_group_municipality': 1}</field>
+    </record>
+</odoo>

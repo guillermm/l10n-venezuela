@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Intentionally empty. Demo activities are created in post_init_hook
+         only when the xmlid does not exist. This file is not loaded. -->
+</odoo>

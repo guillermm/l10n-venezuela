@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_wh_muni_user,account.wh.muni.user,model_account_wh_muni,account.group_account_invoice,1,1,1,0
+access_account_wh_muni_manager,account.wh.muni.manager,model_account_wh_muni,account.group_account_manager,1,1,1,1
+access_l10n_ve_muni_activity_user,l10n.ve.muni.activity.user,model_l10n_ve_muni_activity,account.group_account_invoice,1,0,0,0
+access_l10n_ve_muni_activity_manager,l10n.ve.muni.activity.manager,model_l10n_ve_muni_activity,account.group_account_manager,1,1,1,1
