@@ -1,0 +1,6 @@
+Catalog and models copied from territorial_pd 16.0
+https://github.com/odoo-mastercore/odoo-venezuela/tree/16.0/territorial_pd
+
+Authors: SINAPSYS GLOBAL SA, MASTERCORE SAS
+License: LGPL-3.0 or later
+Organizers listed by Mastercore: Reydi Hernández, Freddy Arraez, Elvis Paez

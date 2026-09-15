@@ -1,0 +1,62 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* territorial_pd
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-13 21:00+0000\n"
+"PO-Revision-Date: 2026-09-13 21:00+0000\n"
+"Last-Translator: Guillermo Montoya\n"
+"Language-Team: \n"
+"Language: es_VE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: territorial_pd
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state_municipality__code
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state_municipality_parish__code
+msgid "Code"
+msgstr "Código"
+
+#. module: territorial_pd
+#: model:ir.actions.act_window,name:territorial_pd.action_res_country_state_municipality
+#: model:ir.ui.menu,name:territorial_pd.menu_res_country_state_municipality
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state__municipality_ids
+msgid "Municipalities"
+msgstr "Municipios"
+
+#. module: territorial_pd
+#: model:ir.model,name:territorial_pd.model_res_country_state_municipality
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state_municipality__name
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state_municipality_parish__municipality_id
+#: model:ir.model.fields,field_description:territorial_pd.field_res_partner__municipality_id
+msgid "Municipality"
+msgstr "Municipio"
+
+#. module: territorial_pd
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country__nationality
+msgid "Nationality"
+msgstr "Nacionalidad"
+
+#. module: territorial_pd
+#: model:ir.actions.act_window,name:territorial_pd.action_res_country_state_municipality_parish
+#: model:ir.ui.menu,name:territorial_pd.menu_res_country_state_municipality_parish
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state_municipality__parish_ids
+msgid "Parishes"
+msgstr "Parroquias"
+
+#. module: territorial_pd
+#: model:ir.model,name:territorial_pd.model_res_country_state_municipality_parish
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state_municipality_parish__name
+#: model:ir.model.fields,field_description:territorial_pd.field_res_partner__parish_id
+msgid "Parish"
+msgstr "Parroquia"
+
+#. module: territorial_pd
+#: model:ir.model.fields,field_description:territorial_pd.field_res_country_state_municipality__state_id
+msgid "State"
+msgstr "Estado"

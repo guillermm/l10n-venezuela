@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pickers for the contact address only. High priority so catalog menus keep Create. -->
+    <record id="view_res_country_state_search_tree" model="ir.ui.view">
+        <field name="name">res.country.state.tree.contact.address</field>
+        <field name="model">res.country.state</field>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="country_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_municipality_search_tree" model="ir.ui.view">
+        <field name="name">res.country.state.municipality.tree.contact.address</field>
+        <field name="model">res.country.state.municipality</field>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="state_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_parish_search_tree" model="ir.ui.view">
+        <field name="name">res.country.state.municipality.parish.tree.contact.address</field>
+        <field name="model">res.country.state.municipality.parish</field>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="municipality_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_partner_form_inherit_territorial" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.territorial.pd</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_address_format')]/field[@name='state_id']" position="attributes">
+                <attribute name="options">{'no_open': True, 'no_create': True, 'no_create_edit': True, 'no_quick_create': True}</attribute>
+                <attribute name="context">{'country_id': country_id, 'default_country_id': country_id, 'zip': zip, 'tree_view_ref': 'territorial_pd.view_res_country_state_search_tree'}</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('o_address_format')]/field[@name='state_id']" position="after">
+                <field name="country_code" invisible="1"/>
+                <field name="municipality_id"
+                       placeholder="Municipality"
+                       options="{'no_open': True, 'no_create': True, 'no_create_edit': True, 'no_quick_create': True}"
+                       domain="[('state_id', '=', state_id)]"
+                       context="{'tree_view_ref': 'territorial_pd.view_municipality_search_tree'}"
+                       invisible="country_code != 'VE'"/>
+                <field name="parish_id"
+                       placeholder="Parish"
+                       options="{'no_open': True, 'no_create': True, 'no_create_edit': True, 'no_quick_create': True}"
+                       domain="[('municipality_id', '=', municipality_id)]"
+                       context="{'tree_view_ref': 'territorial_pd.view_parish_search_tree'}"
+                       invisible="country_code != 'VE'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
