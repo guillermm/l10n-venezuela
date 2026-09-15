@@ -1,0 +1,2 @@
+# https://github.com/OCA/odoo-community.org/blob/master/website/Contribution/CONTRIBUTING.rst
+currency
