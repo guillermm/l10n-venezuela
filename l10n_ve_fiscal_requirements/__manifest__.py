@@ -1,0 +1,48 @@
+# Copyright 2011-2016 Vauxoo
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+{
+    "name": "Venezuelan Fiscal Requirements",
+    "version": "17.0.1.17.0",
+    "category": "Localization",
+    "author": "Vauxoo",
+    "maintainer": "Guillermo Montoya",
+    "maintainers": [
+        "guillermm",
+    ],
+    "website": "http://vauxoo.com",
+    "license": "AGPL-3",
+    "depends": [
+        "account",
+        "base_vat",
+        "l10n_latam_base",
+        "l10n_ve",
+        "territorial_pd",
+    ],
+    "post_init_hook": "post_init_hook",
+    "data": [
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "data/res_currency_data.xml",
+        "data/l10n_ut_data.xml",
+        "data/seniat_url_data.xml",
+        "data/account_tax_appl_type_data.xml",
+        "data/l10n_latam_identification_type_data.xml",
+        "data/l10n_ve_responsibility_type_data.xml",
+        "data/res_bank.xml",
+        "views/l10n_ut_views.xml",
+        "views/seniat_url_views.xml",
+        "views/l10n_ve_responsibility_type_views.xml",
+        "views/res_partner_views.xml",
+        "views/res_partner_bank_views.xml",
+        "views/res_company_views.xml",
+        "views/account_tax_views.xml",
+        "views/account_move_views.xml",
+        "views/wizards_views.xml",
+        "views/menu_views.xml",
+        "reports/report_invoice.xml",
+    ],
+    "installable": True,
+    "auto_install": False,
+    "application": False,
+}

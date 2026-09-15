@@ -1,0 +1,5 @@
+Bank catalog (res_bank.xml) and SENIAT taxpayer types
+(l10n_ve.responsibility.type) were taken from l10n_ve_base 16.0 of
+https://github.com/odoo-mastercore/odoo-venezuela
+Copyright SINAPSYS GLOBAL SA / MASTERCORE SAS (AGPL-3).
+Adapted to Odoo 17 by Guillermo Montoya. Do not copy Mastercore 18.0/19.0 (OPL-1).
