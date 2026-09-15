@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_wh_src_tree" model="ir.ui.view">
+        <field name="name">account.wh.src.tree</field>
+        <field name="model">account.wh.src</field>
+        <field name="arch" type="xml">
+            <tree string="SRC Withholdings" decoration-info="state == 'draft'" decoration-success="state == 'done'">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="amount_total_ret"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_wh_src_form" model="ir.ui.view">
+        <field name="name">account.wh.src.form</field>
+        <field name="model">account.wh.src</field>
+        <field name="arch" type="xml">
+            <form string="SRC Withholding">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state == 'cancel'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="partner_id" readonly="state != 'draft'"/>
+                            <field name="move_id" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="wh_rate" readonly="state != 'draft'"/>
+                            <field name="amount_base" readonly="state != 'draft'"/>
+                            <field name="amount_total_ret"/>
+                            <field name="journal_id" readonly="state != 'draft'"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="accounting_move_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_wh_src" model="ir.actions.act_window">
+        <field name="name">SRC Withholdings</field>
+        <field name="res_model">account.wh.src</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
