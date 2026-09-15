@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_igtf" model="ir.ui.view">
+        <field name="name">account.move.form.igtf</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_ve_fiscal_requirements.view_move_form_inherit_ve"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sin_cred']" position="after">
+                <field name="l10n_ve_igtf_apply"
+                       invisible="move_type not in ('in_invoice', 'in_refund')"/>
+                <field name="l10n_ve_igtf_rate" invisible="not l10n_ve_igtf_apply"/>
+                <field name="l10n_ve_igtf_amount" invisible="not l10n_ve_igtf_apply"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

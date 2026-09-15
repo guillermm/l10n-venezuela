@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_igtf" model="ir.ui.view">
+        <field name="name">res.company.form.igtf</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_ve_fiscal_requirements.view_company_form_inherit_ve"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='ve_localization']" position="inside">
+                <group string="IGTF">
+                    <field name="l10n_ve_igtf_rate"/>
+                    <field name="l10n_ve_igtf_expense_account_id"/>
+                    <field name="l10n_ve_igtf_perception_agent"/>
+                    <field name="l10n_ve_igtf_perception_agent_date" invisible="not l10n_ve_igtf_perception_agent"/>
+                    <field name="l10n_ve_igtf_perception_account_id" invisible="not l10n_ve_igtf_perception_agent"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,88 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_ve_igtf
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-13 22:00+0000\n"
+"PO-Revision-Date: 2026-09-13 22:00+0000\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_move__l10n_ve_igtf_apply
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_payment__l10n_ve_igtf_apply
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_payment_register__l10n_ve_igtf_apply
+msgid "Apply IGTF"
+msgstr "Aplicar IGTF"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_move__l10n_ve_igtf_rate
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_payment__l10n_ve_igtf_rate
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_payment_register__l10n_ve_igtf_rate
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_res_company__l10n_ve_igtf_rate
+msgid "IGTF Rate (%)"
+msgstr "Alicuota IGTF (%)"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_move__l10n_ve_igtf_amount
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_payment__l10n_ve_igtf_amount
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_payment_register__l10n_ve_igtf_amount
+msgid "IGTF Amount"
+msgstr "Monto IGTF"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_account_move_line__l10n_ve_igtf_line
+msgid "IGTF Line"
+msgstr "Línea IGTF"
+
+#. module: l10n_ve_igtf
+msgid "IGTF %s%%"
+msgstr "IGTF %s%%"
+
+#. module: l10n_ve_igtf
+msgid "The IGTF rate must be greater than zero."
+msgstr "La alícuota IGTF debe ser mayor que cero."
+
+#. module: l10n_ve_igtf
+msgid "Configure the IGTF expense account first."
+msgstr "Configure primero la cuenta de gasto IGTF."
+
+#. module: l10n_ve_igtf
+msgid "Enable IGTF on the payment journal first."
+msgstr "Active IGTF en el diario de pago primero."
+
+#. module: l10n_ve_igtf
+#: model_terms:ir.ui.view,arch_db:l10n_ve_igtf.view_company_form_igtf
+#: model_terms:ir.ui.view,arch_db:l10n_ve_igtf.view_payment_form_igtf
+msgid "IGTF"
+msgstr "IGTF"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_res_company__l10n_ve_igtf_expense_account_id
+msgid "IGTF Expense Account"
+msgstr "Cuenta de Gasto IGTF"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_res_company__l10n_ve_igtf_perception_account_id
+msgid "IGTF Perception Account"
+msgstr "Cuenta de IGTF Percibido"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_res_company__l10n_ve_igtf_perception_agent
+msgid "IGTF Perception Agent"
+msgstr "Agente de Percepción IGTF"
+
+#. module: l10n_ve_igtf
+#: model:ir.model.fields,field_description:l10n_ve_igtf.field_res_company__l10n_ve_igtf_perception_agent_date
+msgid "IGTF Agent Since"
+msgstr "Agente IGTF desde"
+
+#. module: l10n_ve_igtf
+msgid "Configure the IGTF perception account first."
+msgstr "Configure primero la cuenta de IGTF percibido."

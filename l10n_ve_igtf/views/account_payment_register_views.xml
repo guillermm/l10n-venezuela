@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_register_form_igtf" model="ir.ui.view">
+        <field name="name">account.payment.register.form.igtf</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='communication']" position="after">
+                <field name="l10n_ve_igtf_available" invisible="1"/>
+                <field name="l10n_ve_igtf_apply" invisible="not l10n_ve_igtf_available"/>
+                <field name="l10n_ve_igtf_rate" invisible="not l10n_ve_igtf_apply"/>
+                <field name="l10n_ve_igtf_amount" invisible="not l10n_ve_igtf_apply"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
