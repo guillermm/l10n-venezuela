@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_register_wh_islr" model="ir.ui.view">
+        <field name="name">account.payment.register.wh.islr</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='communication']" position="after">
+                <group string="Retención de ISLR" invisible="payment_type != 'outbound' or partner_type != 'supplier' or not can_edit_wizard">
+                    <field name="can_edit_wizard" invisible="1"/>
+                    <field name="l10n_ve_islr_concept_id"/>
+                    <field name="l10n_ve_islr_amount"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

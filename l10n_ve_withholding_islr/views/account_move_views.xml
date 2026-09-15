@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_wh_islr_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.wh.islr.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_generate_wh_islr" string="Generate ISLR Retention" type="object" class="btn-primary" invisible="state != 'posted' or wh_islr_doc_id"/>
+            </xpath>
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="wh_islr_doc_id" readonly="1" invisible="not wh_islr_doc_id"/>
+                <field name="islr_concept_id" invisible="move_type not in ('in_invoice', 'in_refund')"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='tax_ids']" position="after">
+                <field name="islr_concept_id" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
