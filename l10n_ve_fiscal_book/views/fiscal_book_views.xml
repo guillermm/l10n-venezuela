@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fiscal_book_tree" model="ir.ui.view">
+        <field name="name">fiscal.book.tree</field>
+        <field name="model">fiscal.book</field>
+        <field name="arch" type="xml">
+            <tree string="Fiscal Books" decoration-info="state == 'draft'" decoration-success="state == 'done'" decoration-muted="state == 'cancel'">
+                <field name="name"/>
+                <field name="type"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="total_amount"/>
+                <field name="total_base_general"/>
+                <field name="total_tax_general"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_fiscal_book_form" model="ir.ui.view">
+        <field name="name">fiscal.book.form</field>
+        <field name="model">fiscal.book</field>
+        <field name="arch" type="xml">
+            <form string="Fiscal Book">
+                <header>
+                    <button name="action_update_book" invisible="state != 'draft'" string="Update Book Data" type="object" class="btn-primary"/>
+                    <button name="action_export_xlsx" string="Export Excel" type="object"/>
+                    <button name="action_confirm" invisible="state != 'draft'" string="Confirm" type="object" class="btn-primary"/>
+                    <button name="action_done" invisible="state != 'confirmed'" string="Post / Lock Period" type="object" class="btn-primary"/>
+                    <button name="action_draft" invisible="state not in ('cancel', 'confirmed')" string="Set to Draft" type="object"/>
+                    <button name="action_draft" invisible="state != 'done'" string="Reopen Period" type="object" groups="account.group_account_manager" context="{'l10n_ve_unlock_book': 1}"/>
+                    <button name="action_cancel" invisible="state not in ('draft', 'confirmed')" string="Cancel" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="type" readonly="state != 'draft'"/>
+                            <field name="article_number"/>
+                            <field name="period_label"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="date_start" readonly="state != 'draft'"/>
+                            <field name="date_end" readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fiscal Operations">
+                            <field name="line_ids" readonly="1">
+                                <tree>
+                                    <field name="rank"/>
+                                    <field name="doc_date"/>
+                                    <field name="partner_vat"/>
+                                    <field name="partner_id"/>
+                                    <field name="invoice_number"/>
+                                    <field name="nro_ctrl"/>
+                                    <field name="affected_number" optional="show"/>
+                                    <field name="doc_type"/>
+                                    <field name="customs_number" optional="hide"/>
+                                    <field name="expediente" optional="hide"/>
+                                    <field name="is_adjustment" optional="hide"/>
+                                    <field name="withholding_only" optional="hide"/>
+                                    <field name="total_amount"/>
+                                    <field name="exempt_amount"/>
+                                    <field name="sdcf_amount"/>
+                                    <field name="base_general"/>
+                                    <field name="tax_general"/>
+                                    <field name="base_reduced"/>
+                                    <field name="tax_reduced"/>
+                                    <field name="base_additional"/>
+                                    <field name="tax_additional"/>
+                                    <field name="vat_withheld"/>
+                                    <field name="voucher_number"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total_amount"/>
+                                <field name="total_exempt"/>
+                                <field name="total_sdcf"/>
+                                <field name="total_base_general"/>
+                                <field name="total_tax_general"/>
+                                <field name="total_base_reduced"/>
+                                <field name="total_tax_reduced"/>
+                                <field name="total_base_additional"/>
+                                <field name="total_tax_additional"/>
+                                <field name="total_vat_withheld" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </page>
+                        <page string="Tax Summary">
+                            <field name="tax_ids" readonly="1">
+                                <tree>
+                                    <field name="appl_type"/>
+                                    <field name="base_amount"/>
+                                    <field name="tax_amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fiscal_book_purchase" model="ir.actions.act_window">
+        <field name="name">Purchase Fiscal Books</field>
+        <field name="res_model">fiscal.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type', '=', 'purchase')]</field>
+        <field name="context">{'default_type': 'purchase'}</field>
+    </record>
+
+    <record id="action_fiscal_book_sale" model="ir.actions.act_window">
+        <field name="name">Sale Fiscal Books</field>
+        <field name="res_model">fiscal.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type', '=', 'sale')]</field>
+        <field name="context">{'default_type': 'sale'}</field>
+    </record>
+</odoo>
