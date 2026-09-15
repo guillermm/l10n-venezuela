@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_register_wh_iva" model="ir.ui.view">
+        <field name="name">account.payment.register.wh.iva</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='communication']" position="after">
+                <group string="Retención de IVA" invisible="not can_edit_wizard">
+                    <field name="can_edit_wizard" invisible="1"/>
+                    <field name="l10n_ve_iva_wh_amount" invisible="payment_type != 'outbound' or partner_type != 'supplier'"/>
+                    <field name="l10n_ve_iva_wh_received_amount" invisible="payment_type != 'inbound' or partner_type != 'customer'"/>
+                    <field name="l10n_ve_iva_wh_voucher_number" invisible="payment_type != 'inbound' or partner_type != 'customer'"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
