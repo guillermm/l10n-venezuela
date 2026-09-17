@@ -1,9 +1,17 @@
 # Copyright 2011-2016 Vauxoo
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-# SENIAT codes: Decreto 1.808 / PA 0095. Sustraendo 83.3334 UT (Reglamento).
+# Decreto 1.808 Art. 9 (G.O. 36.203 / 12-05-1997), still in force.
+# XML codes: Manual técnico SENIAT / PA SNAT/2009/0095.
+# Sustraendo PNRE: 83.3334 UT (Art. 9 Parágrafo Segundo).
+# Tarifa N° 2 (PJND): 15 % / 22 % / 34 % on accumulated UT — not a flat
+# rate, so the catalog stores 0 % and the voucher line must be set.
 # Rate code is per person type (not a single code per activity).
+# Payroll concept 001 and share/dividend XML are out of scope.
 
 # (xmlid, name, display_code, nature, [(person_type, seniat_code, base%, wh%, subtract_ut), ...])
+TARIFA2 = 0.0
+SUSTRAENDO_PNRE = 83.3334
+
 SENIAT_ISLR_CATALOG = (
     (
         "concept_honorarios_prof",
@@ -11,9 +19,10 @@ SENIAT_ISLR_CATALOG = (
         "002",
         "fees",
         (
-            ("pnre", "002", 100.0, 3.0, 83.3334),
+            ("pnre", "002", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "003", 90.0, 34.0, 0.0),
             ("pjdo", "004", 100.0, 5.0, 0.0),
+            ("pjnd", "005", 90.0, TARIFA2, 0.0),
         ),
     ),
     (
@@ -22,9 +31,10 @@ SENIAT_ISLR_CATALOG = (
         "006",
         "fees",
         (
-            ("pnre", "006", 100.0, 3.0, 83.3334),
+            ("pnre", "006", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "007", 90.0, 34.0, 0.0),
             ("pjdo", "008", 100.0, 5.0, 0.0),
+            ("pjnd", "009", 90.0, TARIFA2, 0.0),
         ),
     ),
     (
@@ -33,7 +43,7 @@ SENIAT_ISLR_CATALOG = (
         "010",
         "fees",
         (
-            ("pnre", "010", 100.0, 3.0, 83.3334),
+            ("pnre", "010", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "011", 90.0, 34.0, 0.0),
         ),
     ),
@@ -43,7 +53,7 @@ SENIAT_ISLR_CATALOG = (
         "012",
         "fees",
         (
-            ("pnre", "012", 100.0, 3.0, 83.3334),
+            ("pnre", "012", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "013", 90.0, 34.0, 0.0),
         ),
     ),
@@ -53,7 +63,7 @@ SENIAT_ISLR_CATALOG = (
         "014",
         "service",
         (
-            ("pnre", "014", 100.0, 3.0, 83.3334),
+            ("pnre", "014", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "015", 100.0, 34.0, 0.0),
             ("pjdo", "016", 100.0, 5.0, 0.0),
             ("pjnd", "017", 100.0, 5.0, 0.0),
@@ -65,66 +75,28 @@ SENIAT_ISLR_CATALOG = (
         "018",
         "service",
         (
-            ("pnre", "018", 100.0, 3.0, 83.3334),
+            ("pnre", "018", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "019", 100.0, 34.0, 0.0),
             ("pjdo", "020", 100.0, 5.0, 0.0),
             ("pjnd", "021", 100.0, 5.0, 0.0),
         ),
     ),
     (
-        "concept_servicios_gen",
-        "Pagos a contratistas o subcontratistas por ejecución de obras o prestación de servicios",
-        "053",
+        "concept_intereses_art27",
+        "Intereses Art. 27 numeral 2 de la Ley de ISLR",
+        "022",
         "service",
         (
-            ("pnre", "053", 100.0, 1.0, 83.3334),
-            ("pnnr", "054", 100.0, 34.0, 0.0),
-            ("pjdo", "055", 100.0, 2.0, 0.0),
+            ("pnnr", "022", 95.0, 34.0, 0.0),
+            ("pjnd", "023", 95.0, TARIFA2, 0.0),
         ),
     ),
     (
-        "concept_fletes",
-        "Pagos por gastos de transporte conformados por fletes",
-        "071",
+        "concept_intereses_exterior",
+        "Intereses de préstamos a instituciones financieras del exterior no domiciliadas",
+        "024",
         "service",
-        (
-            ("pnre", "071", 100.0, 1.0, 83.3334),
-            ("pjdo", "072", 100.0, 5.0, 0.0),
-        ),
-    ),
-    (
-        "concept_arrendamiento_inmueble",
-        "Pagos a los arrendadores de bienes inmuebles situados en el país",
-        "057",
-        "lease",
-        (
-            ("pnre", "057", 100.0, 3.0, 83.3334),
-            ("pnnr", "058", 100.0, 34.0, 0.0),
-            ("pjdo", "059", 100.0, 5.0, 0.0),
-        ),
-    ),
-    (
-        "concept_canon_muebles",
-        "Cánones de arrendamiento de bienes muebles situados en el país",
-        "061",
-        "lease",
-        (
-            ("pnre", "061", 100.0, 3.0, 83.3334),
-            ("pnnr", "062", 100.0, 34.0, 0.0),
-            ("pjdo", "063", 100.0, 5.0, 0.0),
-            ("pjnd", "064", 100.0, 5.0, 0.0),
-        ),
-    ),
-    (
-        "concept_publicidad",
-        "Pagos por servicios de publicidad y propaganda y cesión de espacios",
-        "083",
-        "service",
-        (
-            ("pnre", "083", 100.0, 5.0, 83.3334),
-            ("pjdo", "084", 100.0, 5.0, 0.0),
-            ("pjnd", "085", 100.0, 5.0, 0.0),
-        ),
+        (("pjnd", "024", 100.0, 4.95, 0.0),),
     ),
     (
         "concept_intereses_pj",
@@ -132,67 +104,90 @@ SENIAT_ISLR_CATALOG = (
         "025",
         "service",
         (
-            ("pnre", "025", 100.0, 3.0, 83.3334),
+            ("pnre", "025", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "026", 95.0, 34.0, 0.0),
             ("pjdo", "027", 100.0, 5.0, 0.0),
+            ("pjnd", "028", 95.0, TARIFA2, 0.0),
         ),
     ),
     (
-        "concept_intereses_exterior",
-        "Intereses de préstamos a instituciones financieras del exterior no domiciliadas",
-        "023",
+        "concept_agencias_noticias",
+        "Agencias de noticias internacionales",
+        "029",
         "service",
-        (("pjnd", "023", 100.0, 4.95, 0.0),),
+        (("pjnd", "029", 15.0, TARIFA2, 0.0),),
     ),
     (
-        "concept_fondos_comercio",
-        "Cantidades pagadas por adquisición de fondos de comercio situados en el país",
-        "079",
-        "good",
+        "concept_fletes_internacional",
+        "Fletes y gastos de transporte internacional (Venezuela y el exterior)",
+        "030",
+        "service",
+        (("pjnd", "030", 5.0, TARIFA2, 0.0),),
+    ),
+    (
+        "concept_fletes_agencias_internac",
+        "Fletes en el país a empresas de transporte internacional",
+        "031",
+        "service",
+        (("pjnd", "031", 10.0, TARIFA2, 0.0),),
+    ),
+    (
+        "concept_peliculas",
+        "Enriquecimientos netos de exhibición de películas, cine o televisión",
+        "032",
+        "service",
         (
-            ("pnre", "079", 100.0, 3.0, 83.3334),
-            ("pnnr", "080", 100.0, 34.0, 0.0),
-            ("pjdo", "081", 100.0, 5.0, 0.0),
-            ("pjnd", "082", 100.0, 5.0, 0.0),
+            ("pnnr", "032", 25.0, 34.0, 0.0),
+            ("pjnd", "033", 25.0, TARIFA2, 0.0),
         ),
     ),
     (
-        "concept_seguros_prestacion",
-        "Pagos de empresas de seguro y reaseguro por servicios que les son propios",
-        "073",
+        "concept_regalias",
+        "Regalías y demás participaciones análogas",
+        "034",
         "service",
         (
-            ("pnre", "073", 100.0, 3.0, 83.3334),
-            ("pjdo", "074", 100.0, 5.0, 0.0),
+            ("pnnr", "034", 90.0, 34.0, 0.0),
+            ("pjnd", "035", 90.0, TARIFA2, 0.0),
         ),
     ),
     (
-        "concept_seguros_reparacion",
-        "Pagos de empresas de seguro a contratistas por reparación de daños",
-        "075",
-        "service",
-        (("pnre", "075", 100.0, 3.0, 83.3334),),
-    ),
-    (
-        "concept_seguros_clinicas",
-        "Pagos de empresas de seguro a clínicas u hospitales por atención a asegurados",
-        "077",
-        "service",
+        "concept_asistencia_tecnica",
+        "Remuneraciones y honorarios por asistencia técnica",
+        "036",
+        "fees",
         (
-            ("pnre", "077", 100.0, 3.0, 83.3334),
-            ("pjdo", "078", 100.0, 5.0, 0.0),
+            ("pnnr", "036", 30.0, 34.0, 0.0),
+            ("pjnd", "037", 30.0, TARIFA2, 0.0),
         ),
     ),
     (
-        "concept_premios_animales",
-        "Pagos a propietarios de animales de carrera por premios",
-        "049",
+        "concept_servicios_tecnologicos",
+        "Servicios tecnológicos utilizados en el país o cedidos a terceros",
+        "038",
         "service",
         (
-            ("pnre", "049", 100.0, 3.0, 83.3334),
-            ("pnnr", "050", 100.0, 34.0, 0.0),
-            ("pjdo", "051", 100.0, 5.0, 0.0),
-            ("pjnd", "052", 100.0, 5.0, 0.0),
+            ("pnnr", "038", 50.0, 34.0, 0.0),
+            ("pjnd", "039", 50.0, TARIFA2, 0.0),
+        ),
+    ),
+    (
+        "concept_primas_seguros",
+        "Enriquecimientos netos derivados de primas de seguros y reaseguros",
+        "040",
+        "service",
+        (("pjnd", "040", 30.0, 10.0, 0.0),),
+    ),
+    (
+        "concept_juegos_apuestas",
+        "Ganancias obtenidas por juegos y apuestas",
+        "041",
+        "service",
+        (
+            ("pnre", "041", 100.0, 34.0, 0.0),
+            ("pnnr", "042", 100.0, 34.0, 0.0),
+            ("pjdo", "043", 100.0, 34.0, 0.0),
+            ("pjnd", "044", 100.0, 34.0, 0.0),
         ),
     ),
     (
@@ -208,58 +203,52 @@ SENIAT_ISLR_CATALOG = (
         ),
     ),
     (
-        "concept_juegos_apuestas",
-        "Ganancias obtenidas por juegos y apuestas",
-        "041",
+        "concept_premios_animales",
+        "Pagos a propietarios de animales de carrera por premios",
+        "049",
         "service",
         (
-            ("pnre", "041", 100.0, 34.0, 0.0),
-            ("pnnr", "042", 100.0, 34.0, 0.0),
-            ("pjdo", "043", 100.0, 34.0, 0.0),
-            ("pjnd", "044", 100.0, 34.0, 0.0),
+            ("pnre", "049", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pnnr", "050", 100.0, 34.0, 0.0),
+            ("pjdo", "051", 100.0, 5.0, 0.0),
+            ("pjnd", "052", 100.0, 5.0, 0.0),
         ),
     ),
     (
-        "concept_regalias",
-        "Regalías y demás participaciones análogas",
-        "034",
+        "concept_servicios_gen",
+        "Pagos a contratistas o subcontratistas por ejecución de obras o prestación de servicios",
+        "053",
         "service",
-        (("pnnr", "034", 90.0, 34.0, 0.0),),
+        (
+            ("pnre", "053", 100.0, 1.0, SUSTRAENDO_PNRE),
+            ("pnnr", "054", 100.0, 34.0, 0.0),
+            ("pjdo", "055", 100.0, 2.0, 0.0),
+            ("pjnd", "056", 100.0, TARIFA2, 0.0),
+        ),
     ),
     (
-        "concept_asistencia_tecnica",
-        "Remuneraciones y honorarios por asistencia técnica",
-        "036",
-        "fees",
-        (("pnnr", "036", 30.0, 34.0, 0.0),),
+        "concept_arrendamiento_inmueble",
+        "Pagos a los arrendadores de bienes inmuebles situados en el país",
+        "057",
+        "lease",
+        (
+            ("pnre", "057", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pnnr", "058", 100.0, 34.0, 0.0),
+            ("pjdo", "059", 100.0, 5.0, 0.0),
+            ("pjnd", "060", 100.0, TARIFA2, 0.0),
+        ),
     ),
     (
-        "concept_servicios_tecnologicos",
-        "Servicios tecnológicos utilizados en el país o cedidos a terceros",
-        "038",
-        "service",
-        (("pnnr", "038", 50.0, 34.0, 0.0),),
-    ),
-    (
-        "concept_primas_seguros",
-        "Enriquecimientos netos derivados de primas de seguros y reaseguros",
-        "040",
-        "service",
-        (("pjnd", "040", 30.0, 10.0, 0.0),),
-    ),
-    (
-        "concept_peliculas",
-        "Enriquecimientos netos de exhibición de películas, cine o televisión",
-        "032",
-        "service",
-        (("pnnr", "032", 25.0, 34.0, 0.0),),
-    ),
-    (
-        "concept_publicidad_emisoras",
-        "Publicidad y cesión de espacios a emisoras de radio",
-        "086",
-        "service",
-        (("pjdo", "086", 100.0, 3.0, 0.0),),
+        "concept_canon_muebles",
+        "Cánones de arrendamiento de bienes muebles situados en el país",
+        "061",
+        "lease",
+        (
+            ("pnre", "061", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pnnr", "062", 100.0, 34.0, 0.0),
+            ("pjdo", "063", 100.0, 5.0, 0.0),
+            ("pjnd", "064", 100.0, 5.0, 0.0),
+        ),
     ),
     (
         "concept_tarjetas_credito",
@@ -267,7 +256,7 @@ SENIAT_ISLR_CATALOG = (
         "065",
         "service",
         (
-            ("pnre", "065", 100.0, 3.0, 83.3334),
+            ("pnre", "065", 100.0, 3.0, SUSTRAENDO_PNRE),
             ("pnnr", "066", 100.0, 34.0, 0.0),
             ("pjdo", "067", 100.0, 5.0, 0.0),
             ("pjnd", "068", 100.0, 5.0, 0.0),
@@ -278,6 +267,79 @@ SENIAT_ISLR_CATALOG = (
         "Pagos efectuados por empresas emisoras de tarjetas de crédito por consumo de gasolina",
         "069",
         "service",
-        (("pnre", "069", 100.0, 1.0, 83.3334),),
+        (
+            ("pnre", "069", 100.0, 1.0, SUSTRAENDO_PNRE),
+            ("pjdo", "070", 100.0, 1.0, 0.0),
+        ),
+    ),
+    (
+        "concept_fletes",
+        "Pagos por gastos de transporte conformados por fletes",
+        "071",
+        "service",
+        (
+            ("pnre", "071", 100.0, 1.0, SUSTRAENDO_PNRE),
+            ("pjdo", "072", 100.0, 3.0, 0.0),
+        ),
+    ),
+    (
+        "concept_seguros_prestacion",
+        "Pagos de empresas de seguro y reaseguro por servicios que les son propios",
+        "073",
+        "service",
+        (
+            ("pnre", "073", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pjdo", "074", 100.0, 5.0, 0.0),
+        ),
+    ),
+    (
+        "concept_seguros_reparacion",
+        "Pagos de empresas de seguro a contratistas por reparación de daños",
+        "075",
+        "service",
+        (
+            ("pnre", "075", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pjdo", "076", 100.0, 5.0, 0.0),
+        ),
+    ),
+    (
+        "concept_seguros_clinicas",
+        "Pagos de empresas de seguro a clínicas u hospitales por atención a asegurados",
+        "077",
+        "service",
+        (
+            ("pnre", "077", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pjdo", "078", 100.0, 5.0, 0.0),
+        ),
+    ),
+    (
+        "concept_fondos_comercio",
+        "Cantidades pagadas por adquisición de fondos de comercio situados en el país",
+        "079",
+        "good",
+        (
+            ("pnre", "079", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pnnr", "080", 100.0, 34.0, 0.0),
+            ("pjdo", "081", 100.0, 5.0, 0.0),
+            ("pjnd", "082", 100.0, 5.0, 0.0),
+        ),
+    ),
+    (
+        "concept_publicidad",
+        "Pagos por servicios de publicidad y propaganda y cesión de espacios",
+        "083",
+        "service",
+        (
+            ("pnre", "083", 100.0, 3.0, SUSTRAENDO_PNRE),
+            ("pjdo", "084", 100.0, 5.0, 0.0),
+            ("pjnd", "085", 100.0, 5.0, 0.0),
+        ),
+    ),
+    (
+        "concept_publicidad_emisoras",
+        "Publicidad y cesión de espacios a emisoras de radio",
+        "086",
+        "service",
+        (("pjdo", "086", 100.0, 3.0, 0.0),),
     ),
 )
