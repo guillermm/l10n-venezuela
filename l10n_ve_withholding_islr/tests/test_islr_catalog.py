@@ -14,7 +14,8 @@ class TestIslrCatalog(TransactionCase):
     def test_catalog_codes_are_unique(self):
         codes = [rate[1] for item in SENIAT_ISLR_CATALOG for rate in item[4]]
         self.assertEqual(len(codes), len(set(codes)))
-        self.assertGreaterEqual(len(codes), 60)
+        self.assertGreaterEqual(len(codes), 80)
+        self.assertNotIn("001", codes)
 
     def test_honorarios_official_codes(self):
         concept = self._concept("concept_honorarios_prof")
@@ -22,6 +23,7 @@ class TestIslrCatalog(TransactionCase):
         self.assertEqual(concept.get_rate_for_person("pnre").code, "002")
         self.assertEqual(concept.get_rate_for_person("pnnr").code, "003")
         self.assertEqual(concept.get_rate_for_person("pjdo").code, "004")
+        self.assertEqual(concept.get_rate_for_person("pjnd").code, "005")
         pnre = concept.get_rate_for_person("pnre")
         self.assertAlmostEqual(pnre.wh_percentage, 3.0)
         self.assertAlmostEqual(pnre.subtract_ut, 83.3334)
@@ -29,6 +31,7 @@ class TestIslrCatalog(TransactionCase):
         self.assertAlmostEqual(pnnr.base_percentage, 90.0)
         self.assertAlmostEqual(pnnr.wh_percentage, 34.0)
         self.assertAlmostEqual(concept.get_rate_for_person("pjdo").wh_percentage, 5.0)
+        self.assertAlmostEqual(concept.get_rate_for_person("pjnd").wh_percentage, 0.0)
 
     def test_obras_fletes_and_lease_codes(self):
         obras = self._concept("concept_servicios_gen")
@@ -36,16 +39,33 @@ class TestIslrCatalog(TransactionCase):
         self.assertEqual(obras.get_rate_for_person("pnre").code, "053")
         self.assertEqual(obras.get_rate_for_person("pnnr").code, "054")
         self.assertEqual(obras.get_rate_for_person("pjdo").code, "055")
+        self.assertEqual(obras.get_rate_for_person("pjnd").code, "056")
         self.assertAlmostEqual(obras.get_rate_for_person("pnre").subtract_ut, 83.3334)
 
         fletes = self._concept("concept_fletes")
         self.assertEqual(fletes.get_rate_for_person("pnre").code, "071")
         self.assertEqual(fletes.get_rate_for_person("pjdo").code, "072")
+        self.assertAlmostEqual(fletes.get_rate_for_person("pjdo").wh_percentage, 3.0)
 
         lease = self._concept("concept_arrendamiento_inmueble")
         self.assertEqual(lease.get_rate_for_person("pnre").code, "057")
         self.assertEqual(lease.get_rate_for_person("pnnr").code, "058")
         self.assertEqual(lease.get_rate_for_person("pjdo").code, "059")
+        self.assertEqual(lease.get_rate_for_person("pjnd").code, "060")
+
+    def test_decreto_1808_interest_and_advertising(self):
+        exterior = self._concept("concept_intereses_exterior")
+        self.assertEqual(exterior.code, "024")
+        self.assertEqual(exterior.get_rate_for_person("pjnd").code, "024")
+        self.assertAlmostEqual(exterior.get_rate_for_person("pjnd").wh_percentage, 4.95)
+
+        art27 = self._concept("concept_intereses_art27")
+        self.assertEqual(art27.get_rate_for_person("pnnr").code, "022")
+        self.assertEqual(art27.get_rate_for_person("pjnd").code, "023")
+
+        ads = self._concept("concept_publicidad")
+        self.assertAlmostEqual(ads.get_rate_for_person("pnre").wh_percentage, 3.0)
+        self.assertAlmostEqual(ads.get_rate_for_person("pnre").subtract_ut, 83.3334)
 
     def test_seeded_xmlids_were_corrected(self):
         """Former seed 003/012/024/016 must not keep the wrong meaning."""

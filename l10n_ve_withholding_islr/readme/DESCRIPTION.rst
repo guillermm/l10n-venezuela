@@ -3,9 +3,10 @@ Management Withholding ISLR Venezuelan Laws
 
 Income tax withholding (Retención de ISLR) for Odoo 17:
 
-- Official SENIAT concept catalog (Decreto 1.808 / PA 0095). Each activity
-  has one code per person type (PNRE / PNNR / PJDO / PJND). Example:
-  professional fees are 002 / 003 / 004, not a single concept code.
+- Official SENIAT concept catalog (Decreto 1.808 Art. 9 / PA 0095). Each
+  activity has one code per person type (PNRE / PNNR / PJDO / PJND).
+  Example: professional fees are 002 / 003 / 004 / 005. PJND Tarifa N° 2
+  is progressive (not a flat rate); set the percentage on the voucher.
 - PNRE sustraendo uses 83.3334 UT (Reglamento). The XML field
   ``CodigoConcepto`` comes from the rate of the partner type, in VES.
 - Applied when registering a payment (write-off).

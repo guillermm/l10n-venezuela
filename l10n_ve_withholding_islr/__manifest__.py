@@ -3,7 +3,7 @@
 
 {
     "name": "Management Withholding ISLR Venezuelan Laws",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.4.0",
     "category": "Localization",
     "author": "Vauxoo",
     "maintainer": "Guillermo Montoya",
