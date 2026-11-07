@@ -94,3 +94,16 @@ class TestRifAndUt(TransactionCase):
             self.skipTest("Company currency is the test currency")
         with self.assertRaises(UserError):
             self.ut.amount_to_ves(10.0, currency, "2025-09-01")
+
+    def test_commercials_with_activity_handles_callable_payment_state(self):
+        """Chart install writes country on the company partner; payment.state is callable."""
+        selection = self.env["account.payment"]._fields["state"].selection
+        self.assertTrue(callable(selection))
+        partner = self.env["res.partner"].create({
+            "name": "Partner init path",
+            "country_id": self.ve.id,
+            "vat": "J555555550",
+            "person_type": "pjdo",
+        })
+        self.assertFalse(partner in partner._l10n_ve_commercials_with_activity())
+        partner.write({"country_id": self.ve.id})

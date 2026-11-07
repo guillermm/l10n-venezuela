@@ -362,18 +362,12 @@ class ResPartner(models.Model):
         remaining = commercials - locked
         if remaining and "account.payment" in self.env:
             payment = self.env["account.payment"].sudo()
-            skip_states = {"draft", "cancel", "canceled", "rejected"}
-            states = [
-                state
-                for state in dict(payment._fields["state"].selection)
-                if state not in skip_states
-            ]
-            if states:
-                payments = payment.search([
-                    ("partner_id.commercial_partner_id", "in", remaining.ids),
-                    ("state", "in", states),
-                ])
-                locked |= payments.mapped("partner_id.commercial_partner_id")
+            # Odoo 17 keeps payment.state.selection as a callable, not a list.
+            payments = payment.search([
+                ("partner_id.commercial_partner_id", "in", remaining.ids),
+                ("state", "not in", ("draft", "cancel", "canceled", "rejected")),
+            ])
+            locked |= payments.mapped("partner_id.commercial_partner_id")
             remaining = commercials - locked
         if remaining:
             locked |= remaining.filtered(lambda partner: partner.credit or partner.debit)

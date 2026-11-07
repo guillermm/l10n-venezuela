@@ -3,7 +3,7 @@
 
 {
     "name": "Venezuelan Fiscal Requirements",
-    "version": "17.0.1.17.0",
+    "version": "17.0.1.18.0",
     "category": "Localization",
     "author": "Vauxoo",
     "maintainer": "Guillermo Montoya",
