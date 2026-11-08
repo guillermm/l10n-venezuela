@@ -12,6 +12,16 @@ class TestTaxApplType(TransactionCase):
         super().setUpClass()
         cls.ve = cls.env.ref("base.ve")
         cls.company = cls.env.company
+        partner_vals = {
+            "vat": "J000000000",
+            "person_type": "pjdo",
+        }
+        rif = cls.env.ref(
+            "l10n_ve_base.it_rif", raise_if_not_found=False
+        ) or cls.env.ref("l10n_latam_base.it_vat", raise_if_not_found=False)
+        if rif:
+            partner_vals["l10n_latam_identification_type_id"] = rif.id
+        cls.company.partner_id.write(partner_vals)
         cls.company.write(
             {
                 "country_id": cls.ve.id,

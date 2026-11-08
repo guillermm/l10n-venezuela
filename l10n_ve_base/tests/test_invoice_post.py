@@ -12,8 +12,8 @@ from .common import L10nVeSetupMixin
 @tagged("post_install", "-at_install")
 class TestInvoicePost(L10nVeSetupMixin, AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         cls._l10n_ve_setup()
         cls.partner = cls._create_ve_partner("Proveedor Fiscal", "J123456784")
 

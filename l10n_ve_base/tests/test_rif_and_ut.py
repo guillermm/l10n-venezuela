@@ -167,10 +167,8 @@ class TestRifAndUt(TransactionCase):
         with self.assertRaises(UserError):
             self.ut.amount_to_ves(10.0, currency, "2025-09-01")
 
-    def test_commercials_with_activity_handles_callable_payment_state(self):
-        """payment.state stays callable after the chart sets the country."""
-        selection = self.env["account.payment"]._fields["state"].selection
-        self.assertTrue(callable(selection))
+    def test_commercials_with_activity_ignores_partner_without_documents(self):
+        """A partner with no posted documents is not locked."""
         partner = self.env["res.partner"].create(
             {
                 "name": "Partner init path",

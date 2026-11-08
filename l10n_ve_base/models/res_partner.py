@@ -238,11 +238,23 @@ class ResPartner(models.Model):
             return False
         if self.user_ids and not self.partner_share:
             return False
+        if self._l10n_ve_is_own_company_partner():
+            return False
         if self.country_id:
             return self.country_id.code == "VE"
         company = self.company_id or self.env.company
         fiscal = company.account_fiscal_country_id or company.country_id
         return bool(self.is_company and fiscal and fiscal.code == "VE")
+
+    def _l10n_ve_is_own_company_partner(self):
+        """The company contact receives the country before it has a RIF."""
+        self.ensure_one()
+        return bool(
+            self.id
+            and self.env["res.company"]
+            .sudo()
+            .search_count([("partner_id", "=", self.id)])
+        )
 
     def _l10n_ve_identification_key_value(self):
         """Normalized RIF, cédula or passport used to detect duplicates."""
@@ -419,12 +431,11 @@ class ResPartner(models.Model):
             }
         )
         suggested = preview._l10n_ve_suggested_person_type()
-        allowed = preview._l10n_ve_allowed_person_types()
         if suggested:
             current = vals.get("person_type")
             if existing and "person_type" not in vals:
                 current = existing.person_type
-            if not current or (allowed and current not in allowed):
+            if not current:
                 vals["person_type"] = suggested
         return vals
 

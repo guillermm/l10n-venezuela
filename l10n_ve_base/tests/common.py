@@ -9,17 +9,21 @@ class L10nVeSetupMixin:
     def _l10n_ve_setup(cls):
         cls.ve_country = cls.env.ref("base.ve")
         cls.company = cls.company_data["company"]
+        partner_vals = {
+            "name": "Empresa Prueba CA",
+            "vat": "J000000000",
+            "person_type": "pjdo",
+        }
+        rif = cls.env.ref(
+            "l10n_ve_base.it_rif", raise_if_not_found=False
+        ) or cls.env.ref("l10n_latam_base.it_vat", raise_if_not_found=False)
+        if rif:
+            partner_vals["l10n_latam_identification_type_id"] = rif.id
+        cls.company.partner_id.write(partner_vals)
         cls.company.write(
             {
                 "country_id": cls.ve_country.id,
                 "account_fiscal_country_id": cls.ve_country.id,
-            }
-        )
-        cls.company.partner_id.write(
-            {
-                "name": "Empresa Prueba CA",
-                "country_id": cls.ve_country.id,
-                "vat": "J000000000",
             }
         )
         if not cls.env["l10n.ut"].search([("date", "<=", "2025-09-01")], limit=1):

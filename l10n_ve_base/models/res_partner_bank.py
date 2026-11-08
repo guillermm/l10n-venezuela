@@ -10,7 +10,10 @@ from odoo import api, fields, models
 class ResPartnerBank(models.Model):
     _inherit = "res.partner.bank"
 
-    l10n_ve_bank_country_code = fields.Char(related="bank_id.country.code")
+    l10n_ve_bank_country_code = fields.Char(
+        related="bank_id.country.code",
+        string="Bank Country Code",
+    )
     l10n_ve_acc_type = fields.Selection(
         selection=[
             ("corriente", "Checking Account"),
