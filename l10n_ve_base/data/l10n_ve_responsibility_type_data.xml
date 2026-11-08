@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <!-- SENIAT taxpayer classes from l10n_ve_base 16.0 (Mastercore / SINAPSYS). -->
+    <!-- SENIAT taxpayer classes from l10n_ve_base 19.0 (Mastercore / SINAPSYS). -->
     <record id="responsibility_ordinario" model="l10n_ve.responsibility.type">
         <field name="name">Contribuyente Ordinario</field>
         <field name="code">1</field>

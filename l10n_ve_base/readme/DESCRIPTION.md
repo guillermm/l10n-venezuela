@@ -3,8 +3,8 @@
 Core fiscal module for Odoo 19. Depends on the official `l10n_ve` chart
 (7-digit account codes), official `l10n_latam_base` (identification
 type + number on the partner). It also loads the Venezuelan political
-division (states, municipalities and parishes; same catalog Mastercore
-ships inside its `l10n_ve_base`). Adds:
+division (states, municipalities and parishes, plus country nationality)
+from Mastercore `l10n_ve_base` 19.0. See `data/ORIGIN.txt`. Adds:
 
 - SENIAT control number (`nro_ctrl`): unique; auto-assigned on customer
   invoices at post; required on vendor bills.
@@ -32,6 +32,6 @@ ships inside its `l10n_ve_base`). Adds:
   `person_type`.
 - Venezuelan bank catalog (SUDEBAN 4-digit BIC) and account type
   (checking / savings / trust) on partner bank accounts. Catalog taken
-  from Mastercore `l10n_ve_base` 16.0.
+  from Mastercore `l10n_ve_base` 19.0.
 - Invoice PDF shows control number, partner/company RIF, municipality
   and parish.

@@ -380,8 +380,9 @@ ul.auto-toc {
 <p>Core fiscal module for Odoo 19. Depends on the official <tt class="docutils literal">l10n_ve</tt>
 chart (7-digit account codes), official <tt class="docutils literal">l10n_latam_base</tt>
 (identification type + number on the partner). It also loads the
-Venezuelan political division (states, municipalities and parishes; same
-catalog Mastercore ships inside its <tt class="docutils literal">l10n_ve_base</tt>). Adds:</p>
+Venezuelan political division (states, municipalities and parishes, plus
+country nationality) from Mastercore <tt class="docutils literal">l10n_ve_base</tt> 19.0. See
+<tt class="docutils literal">data/ORIGIN.txt</tt>. Adds:</p>
 <ul class="simple">
 <li>SENIAT control number (<tt class="docutils literal">nro_ctrl</tt>): unique; auto-assigned on
 customer invoices at post; required on vendor bills.</li>
@@ -409,7 +410,7 @@ in place to 16% / 31% (it does not delete them).</li>
 <tt class="docutils literal">person_type</tt>.</li>
 <li>Venezuelan bank catalog (SUDEBAN 4-digit BIC) and account type
 (checking / savings / trust) on partner bank accounts. Catalog taken
-from Mastercore <tt class="docutils literal">l10n_ve_base</tt> 16.0.</li>
+from Mastercore <tt class="docutils literal">l10n_ve_base</tt> 19.0.</li>
 <li>Invoice PDF shows control number, partner/company RIF, municipality
 and parish.</li>
 </ul>
@@ -499,8 +500,8 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <h2>Contributors</h2>
 <ul class="simple">
 <li>Guillermo Montoya &lt;<a class="reference external" href="https://github.com/guillermm">https://github.com/guillermm</a>&gt;</li>
-<li>SINAPSYS GLOBAL SA / MASTERCORE SAS (bank catalog and SENIAT taxpayer
-types from <tt class="docutils literal">l10n_ve_base</tt> 16.0)</li>
+<li>SINAPSYS GLOBAL SA / MASTERCORE SAS (political division, bank catalog
+and SENIAT taxpayer types from <tt class="docutils literal">l10n_ve_base</tt> 19.0)</li>
 <li>Vauxoo &lt;<a class="reference external" href="mailto:info&#64;vauxoo.com">info&#64;vauxoo.com</a>&gt;</li>
 <li>Nhomar Hernandez &lt;<a class="reference external" href="mailto:nhomar&#64;vauxoo.com">nhomar&#64;vauxoo.com</a>&gt;</li>
 <li>Humberto Arocha &lt;<a class="reference external" href="mailto:hbto&#64;vauxoo.com">hbto&#64;vauxoo.com</a>&gt;</li>

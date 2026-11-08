@@ -1,9 +1,10 @@
-# Copyright 2020-2025 SINAPSYS GLOBAL SA, MASTERCORE SAS
+# Copyright 2025-Present SINAPSYS GLOBAL SA, MASTERCORE SAS
 # Copyright 2026 Guillermo Montoya
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html).
 #
-# Political division folded into this module the way Mastercore 19 does
-# inside l10n_ve_base. Catalog taken from their territorial data.
+# Models and catalog taken from l10n_ve_base 19.0
+# https://github.com/odoo-mastercore/odoo-venezuela/tree/19.0/l10n_ve_base
+# See data/ORIGIN.txt.
 
 from odoo import fields, models
 

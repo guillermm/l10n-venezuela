@@ -1,8 +1,8 @@
-# Copyright 2020-2025 SINAPSYS GLOBAL SA, MASTERCORE SAS
+# Copyright 2025-Present SINAPSYS GLOBAL SA, MASTERCORE SAS
 # Copyright 2026 Guillermo Montoya
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html).
 #
-# Taken from l10n_ve_base 16.0 (odoo-mastercore/odoo-venezuela).
+# Taken from l10n_ve_base 19.0 (odoo-mastercore/odoo-venezuela).
 
 from odoo import fields, models
 

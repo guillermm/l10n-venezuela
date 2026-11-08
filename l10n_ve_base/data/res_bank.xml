@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <!-- Venezuelan SUDEBAN banks. Catalog taken from l10n_ve_base 16.0
+    <!-- Venezuelan SUDEBAN banks. Catalog taken from l10n_ve_base 19.0
          (odoo-mastercore/odoo-venezuela), SINAPSYS GLOBAL SA / MASTERCORE SAS. -->
     <record id="bank_0156" model="res.bank">
         <field name="name">100% BANCO</field>

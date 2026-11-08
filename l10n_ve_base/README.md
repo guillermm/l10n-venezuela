@@ -64,7 +64,8 @@ Do not contact contributors directly about support or help with technical issues
 
 - Vauxoo
 - OpenERP Venezuela
-- SINAPSYS GLOBAL SA / MASTERCORE SAS (bank catalog and SENIAT taxpayer types)
+- SINAPSYS GLOBAL SA / MASTERCORE SAS (political division, bank catalog and SENIAT
+  taxpayer types from `l10n_ve_base` 19.0)
 
 ### Contributors
 
