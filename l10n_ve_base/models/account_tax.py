@@ -68,7 +68,9 @@ class AccountTax(models.Model):
             if target_appl in _L10N_VE_CLEAN_NAME and _L10N_VE_OFFICIAL_NAME.match(
                 source_name.strip()
             ):
-                values["name"] = _L10N_VE_CLEAN_NAME[target_appl]
+                new_name = _L10N_VE_CLEAN_NAME[target_appl]
+                if not tax._l10n_ve_name_taken(new_name):
+                    values["name"] = new_name
                 label = tax._l10n_ve_clean_invoice_label(target_appl)
                 for fname in ("description", "invoice_label"):
                     if fname in tax._fields:
@@ -82,7 +84,7 @@ class AccountTax(models.Model):
                         updated = tax._l10n_ve_replace_rate_label(
                             current, old_amount, values["amount"]
                         )
-                        if updated != current:
+                        if str(updated) != str(current):
                             values[fname] = updated
             if values:
                 tax._l10n_ve_write_tax_values(values, old_amount=old_amount)
@@ -158,6 +160,26 @@ class AccountTax(models.Model):
                 return rate, appl_type, new_amount
         return None
 
+    def _l10n_ve_name_taken(self, name):
+        """True if another tax already uses this name in the company tree."""
+        self.ensure_one()
+        if not name or not self.company_id:
+            return False
+        company = self.company_id
+        root = company.root_id if "root_id" in company._fields else company
+        return bool(
+            self.sudo().search_count(
+                [
+                    ("id", "!=", self.id),
+                    ("name", "=", name),
+                    ("type_tax_use", "=", self.type_tax_use),
+                    ("tax_scope", "=", self.tax_scope),
+                    ("country_id", "=", self.country_id.id),
+                    ("company_id", "child_of", root.id),
+                ]
+            )
+        )
+
     def _l10n_ve_clean_invoice_label(self, appl_type):
         """Name shown in tax list description and invoice label: IVA 16% (ventas)."""
         self.ensure_one()
@@ -176,7 +198,7 @@ class AccountTax(models.Model):
             (f"{old_rate:g}%", f"{new_rate:g}%"),
             (f"{old_rate:.0f}%", f"{new_rate:.0f}%"),
         )
-        result = text
+        result = str(text)
         for old, new in replacements:
             result = result.replace(old, new)
         return result

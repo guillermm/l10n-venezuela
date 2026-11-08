@@ -1,6 +1,8 @@
 # Copyright 2026 Guillermo Montoya
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import re
+
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
@@ -35,6 +37,9 @@ class TestTaxApplType(TransactionCase):
             }
         )
 
+    def _plain(self, value):
+        return re.sub(r"<[^>]+>", "", str(value or "")).strip()
+
     def _create_tax(self, name, amount, type_tax_use="sale"):
         values = {
             "name": name,
@@ -57,8 +62,8 @@ class TestTaxApplType(TransactionCase):
         tax8 = self._create_tax("8%", 8.0)
         tax0 = self._create_tax("0% EXEMPT", 0.0)
         tax22 = self._create_tax("22%", 22.0)
-        tax16 = self._create_tax("16%", 16.0)
-        tax31 = self._create_tax("31%", 31.0)
+        tax16 = self._create_tax("16%", 16.0, type_tax_use="purchase")
+        tax31 = self._create_tax("31%", 31.0, type_tax_use="purchase")
         sdcf = self._create_tax("SDCF", 0.0)
         sdcf.appl_type = "sdcf"
         igtf = self._create_tax("IGTF 3%", 3.0)
@@ -69,23 +74,23 @@ class TestTaxApplType(TransactionCase):
         self.assertAlmostEqual(tax12.amount, 16.0)
         self.assertEqual(tax12.name, "IVA 16%")
         if "description" in tax12._fields:
-            self.assertEqual(tax12.description, "IVA 16% (ventas)")
+            self.assertEqual(self._plain(tax12.description), "IVA 16% (ventas)")
         if "invoice_label" in tax12._fields:
             self.assertEqual(tax12.invoice_label, "IVA 16% (ventas)")
         self.assertEqual(tax8.appl_type, "reducido")
         self.assertAlmostEqual(tax8.amount, 8.0)
         self.assertEqual(tax8.name, "IVA 8%")
         if "description" in tax8._fields:
-            self.assertEqual(tax8.description, "IVA 8% (ventas)")
+            self.assertEqual(self._plain(tax8.description), "IVA 8% (ventas)")
         self.assertEqual(tax0.appl_type, "exento")
         self.assertEqual(tax0.name, "Exento")
         if "description" in tax0._fields:
-            self.assertEqual(tax0.description, "Exento (ventas)")
+            self.assertEqual(self._plain(tax0.description), "Exento (ventas)")
         self.assertEqual(tax22.appl_type, "adicional")
         self.assertAlmostEqual(tax22.amount, 31.0)
         self.assertEqual(tax22.name, "IVA 31%")
         if "description" in tax22._fields:
-            self.assertEqual(tax22.description, "IVA 31% (ventas)")
+            self.assertEqual(self._plain(tax22.description), "IVA 31% (ventas)")
         self.assertEqual(tax16.appl_type, "general")
         self.assertEqual(tax16.name, "IVA 16%")
         self.assertEqual(tax31.appl_type, "adicional")
@@ -111,7 +116,7 @@ class TestTaxApplType(TransactionCase):
         self.assertEqual(sale_12.name, "IVA 16%")
         self.assertEqual(purchase_12.name, "IVA 16%")
         if "description" in purchase_12._fields:
-            self.assertEqual(purchase_12.description, "IVA 16% (compras)")
+            self.assertEqual(self._plain(purchase_12.description), "IVA 16% (compras)")
         self.assertAlmostEqual(sale_12.amount, 16.0)
         self.assertAlmostEqual(purchase_12.amount, 16.0)
 
