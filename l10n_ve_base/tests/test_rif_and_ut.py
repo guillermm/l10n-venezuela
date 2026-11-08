@@ -173,7 +173,7 @@ class TestRifAndUt(TransactionCase):
             {
                 "name": "Partner init path",
                 "country_id": self.ve.id,
-                "vat": "J555555550",
+                "vat": "J555555554",
                 "person_type": "pjdo",
             }
         )

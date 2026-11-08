@@ -120,6 +120,7 @@ class TestInvoicePost(L10nVeSetupMixin, AccountTestInvoicingCommon):
         self.partner.write({"vat": "J111111110"})
         self.assertEqual(self.partner.vat, "J111111110")
         self._create_vendor_bill(self.partner, amount=100.0)
+        self.partner.invalidate_recordset(["l10n_ve_identification_locked"])
         self.assertTrue(self.partner.l10n_ve_identification_locked)
         with self.assertRaises(ValidationError):
             self.partner.write({"vat": "J123456784"})
